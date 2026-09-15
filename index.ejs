@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Web Application</title>
+    <link rel="stylesheet" href="/stylesheet.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Blog Web Application</h1>
+
+        <nav id="category-nav">
+            <button type="button" data-category="All">All Posts</button>
+            <button type="button" data-category="Tech">Tech</button>
+            <button type="button" data-category="Music">Music</button>
+            <button type="button" data-category="Education">Education</button>
+            <button type="button" data-category="Other">Other</button>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2>Blog Posts</h2>
+
+        <button id="toggleForm" type="button">Create Post</button>
+
+        <form id="creationform" action="/posts" method="POST">
+            <label for="postColor">Post Color:</label>
+            <select id="postColor" name="postColor" required>
+                <option value="DarkGreen">Dark Green</option>
+                <option value="Moss">Moss Green</option>
+                <option value="RosyBrown">Rosy Brown</option>
+                <option value="Midnight">Midnight Green</option>
+            </select>
+
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="contents">Blog Contents:</label>
+            <textarea id="contents" name="contents" required></textarea>
+
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Tech">Tech</option>
+                <option value="Music">Music</option>
+                <option value="Education">Education</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <button type="submit">Add Blog Post</button>
+        </form>
+
+        <div id="post-list">
+            <% posts.forEach(post => { %>
+                <article
+                    class="post <%= post.postColor %>"
+                    data-category="<%= post.category %>"
+                >
+                    <h3><%= post.title %></h3>
+
+                    <p>
+                        Written by: <%= post.author %>
+                        |
+                        <%= post.createdAt.toLocaleString() %>
+                    </p>
+
+                    <p>Category: <%= post.category %></p>
+
+                    <div class="post-text">
+                        <p class="post-fragment"><%= post.contents.length > 140 ? post.contents.substring(0, 140) + "..." : post.contents %></p>
+
+                        <p class="post-content"><%= post.contents %></p>
+                    </div>
+
+                    <div class="post-actions">
+                        <button class="edit-post" type="button">Edit</button>
+                        <form action="/posts/<%= post.id %>/delete" method="POST">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+
+                    <form
+                        class="edit-form"
+                        action="/posts/<%= post.id %>/edit"
+                        method="POST"
+                    >
+                        <label>
+                            Title:
+                            <input type="text" name="title" value="<%= post.title %>" required>
+                        </label>
+                        <label>
+                            Author:
+                            <input type="text" name="author" value="<%= post.author %>" required>
+                        </label>
+                        <label>
+                            Blog Contents:
+                            <textarea name="contents" required><%= post.contents %></textarea>
+                        </label>
+                        <label>
+                            Category:
+                            <select name="category" required>
+                                <% ["Tech", "Music", "Education", "Other"].forEach(category => { %>
+                                    <option value="<%= category %>" <%= post.category === category ? "selected" : "" %>>
+                                        <%= category %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                        </label>
+                        <label>
+                            Post Color:
+                            <select name="postColor" required>
+                                <% ["DarkGreen", "Moss", "RosyBrown", "Midnight"].forEach(color => { %>
+                                    <option value="<%= color %>" <%= post.postColor === color ? "selected" : "" %>>
+                                        <%= color %>
+                                    </option>
+                                <% }) %>
+                            </select>
+                        </label>
+                        <button type="submit">Save Changes</button>
+                        <button class="cancel-edit" type="button">Cancel</button>
+                    </form>
+                </article>
+            <% }) %>
+        </div>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+
+#creationform {
+    display: none;
+}
+
+.post {
+    border-radius: 10px;
+    margin: 15px 0;
+    padding: 15px;
+    cursor: pointer;
+    box-shadow: 3px 3px 8px #aaa;
+    color: #f7f4d5;
+}
+
+#contents {
+    width: 100%;
+    min-height: 150px;
+    box-sizing: border-box;
+    resize: none;
+    overflow-y: hidden;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#post-list {
+    padding: 0 5%;
+}
+
+body {
+    background-color: #f7f4d5;
+    margin: 0;
+    padding-top: 100px;
+}
+
+.header {
+    background-color: #0a3323;
+    background: linear-gradient(to bottom right, #0a3323, #839958);
+    color: #f7f4d5;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+h1,h2 {
+    text-align: center;
+}
+
+.main-content {
+    padding: 20px;
+}
+
+.DarkGreen {
+    background-color: #0a3323;
+}
+
+.Moss {
+    background-color: #839958;
+}
+
+.RosyBrown {
+    background-color: #d3968c;
+}
+
+.Midnight {
+    background-color: #105666;
+}
+
+.post-text {
+    display: grid;
+}
+
+.post-fragment,
+.post-content {
+    grid-area: 1 / 1;
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.post-content {
+    display: none;
+}
+
+.post.open .post-content {
+    display: block;
+}
+
+.post.open .post-fragment {
+    display: none;
+}
+
+.post-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.edit-form {
+    display: none;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.edit-form.visible {
+    display: grid;
+}
+
+.edit-form label {
+    display: grid;
+    gap: 4px;
+}
+
+.edit-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+#toggleForm {
+    margin: 25px auto;
+    display: block;
+}
+
+#category-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#category-nav button.active {
+    background-color: #f7f4d5;
+    color: #0a3323;
+    font-weight: bold;
+}
+
+#category-nav button:hover {
+    background-color: #d3968c;
+    color: #f7f4d5;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .search-bar-container {
+        max-width: 90%;
+    }
+    .dashboard {
+        max-width: 90%;
+    }
+
+    .card {
+        padding: 30px;
+        min-height: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+
+    .search-bar-container {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+    .dashboard {
+        max-width: 95%;
+    }
+}
